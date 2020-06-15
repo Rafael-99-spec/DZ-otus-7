@@ -1,0 +1,11 @@
+[Unit]
+Description=Find log file
+
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/grep "systemd" /var/log/messages
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target
