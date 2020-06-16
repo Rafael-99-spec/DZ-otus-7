@@ -2,8 +2,8 @@
 Description=Running findwork.service
 
 [Timer]
-OnCalendar=*:0/30
+OnUnitActiveSec=30
 Unit=findword.service
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=timers.target
