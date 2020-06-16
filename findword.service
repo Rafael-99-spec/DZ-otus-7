@@ -3,10 +3,5 @@ Description=Find log file
 Wants=findword.timer
 
 [Service]
-Type=simple
-User=root
+Type=oneshot
 ExecStart=/bin/grep "systemd" /var/log/messages
-RemainAfterExit=no
-
-[Install]
-WantedBy=multi-user.target
