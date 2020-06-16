@@ -1,9 +1,10 @@
 [Unit]
-Description=Running findword.service
+Description=Timer
 
 [Timer]
-OnUnitActiveSec=30
-Unit=findword.service
+OnUnitActiveSec=30s
+OnBootSec=30s
 
 [Install]
 WantedBy=timers.target
+
