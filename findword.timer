@@ -1,5 +1,5 @@
 [Unit]
-Description=Running findwork.service
+Description=Running findword.service
 
 [Timer]
 OnUnitActiveSec=30
