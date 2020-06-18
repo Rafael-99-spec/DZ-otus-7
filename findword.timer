@@ -2,9 +2,9 @@
 Description=Timer
 
 [Timer]
+OnActiveSec=0
 OnUnitActiveSec=30s
 OnBootSec=30s
 
 [Install]
 WantedBy=timers.target
-
