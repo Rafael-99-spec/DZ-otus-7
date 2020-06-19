@@ -1,0 +1,3 @@
+# Configuration file for my findword service
+WORD="systemd"
+LOG=/var/log/findword.log
