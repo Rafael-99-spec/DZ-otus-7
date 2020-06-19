@@ -9,6 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "centos/7"
   config.vm.provision "shell", inline: <<-SHELL
   sudo yum install vim nano httpd -y
+  sudo cp /vagrant/findword /etc/sysconfig/findword
   sudo cp /vagrant/findword.service /etc/systemd/system/findword.service
   sudo cp /vagrant/findword.timer /etc/systemd/system/findword.timer
   sudo cp /vagrant/findword.log /var/log/findword.log
