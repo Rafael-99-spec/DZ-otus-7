@@ -4,4 +4,4 @@ Description=Starting findword service
 [Service]
 Type=oneshot
 EnvironmentFile=/etc/sysconfig/findword
-ExecStart=/bin/grep "systemd" /var/log/findword.log
+ExecStart=/bin/grep $WORD $LOG
