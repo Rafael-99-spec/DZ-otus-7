@@ -58,11 +58,8 @@ WantedBy=multi-user.target
 Для того чтобы оба юнита приступили к выполнению своих функции необходимо их включить и при это настроить автоматическое включение после загрузки системы, с помощью нижеуказанных команд.
 ```
 [vagrant@localhost ~]$ sudo systemctl enable findword.service
-
 [vagrant@localhost ~]$ sudo systemctl enable findword.timer
-
 [vagrant@localhost ~]$ sudo systemctl start findword.service
-
 [vagrant@localhost ~]$ sudo systemctl start findword.timer
 ```
 Далее для того чтобы убедиться, что наши юниты функционируют корректно, достаточно всего лишь посмотреть статус службы findword.service с помощью утилиты systemctl
