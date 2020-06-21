@@ -131,5 +131,54 @@ PIDFile=/var/run/spawn-fcgi.pid
 WantedBy=multi-user.target
 ```
 
+```
+[vagrant@localhost ~]$ sudo systemctl start spawn-fcgi
+[vagrant@localhost ~]$ sudo systemctl status spawn-fcgi
+```
+
+```
+[vagrant@localhost ~]$ sudo systemctl status spawn-fcgi -l
+● spawn-fcgi.service - Spawn FastCGI scripts to be used by web servers
+   Loaded: loaded (/etc/systemd/system/spawn-fcgi.service; disabled; vendor preset: disabled)
+   Active: active (running) since Sun 2020-06-21 16:57:32 UTC; 55s ago
+ Main PID: 3186 (php-cgi)
+   CGroup: /system.slice/spawn-fcgi.service
+           ├─3186 /usr/bin/php-cgi
+           ├─3187 /usr/bin/php-cgi
+           ├─3188 /usr/bin/php-cgi
+           ├─3189 /usr/bin/php-cgi
+           ├─3190 /usr/bin/php-cgi
+           ├─3191 /usr/bin/php-cgi
+           ├─3192 /usr/bin/php-cgi
+           ├─3193 /usr/bin/php-cgi
+           ├─3194 /usr/bin/php-cgi
+           ├─3195 /usr/bin/php-cgi
+           ├─3196 /usr/bin/php-cgi
+           ├─3197 /usr/bin/php-cgi
+           ├─3198 /usr/bin/php-cgi
+           ├─3199 /usr/bin/php-cgi
+           ├─3200 /usr/bin/php-cgi
+           ├─3201 /usr/bin/php-cgi
+           ├─3202 /usr/bin/php-cgi
+           ├─3203 /usr/bin/php-cgi
+           ├─3204 /usr/bin/php-cgi
+           ├─3205 /usr/bin/php-cgi
+           ├─3206 /usr/bin/php-cgi
+           ├─3207 /usr/bin/php-cgi
+           ├─3208 /usr/bin/php-cgi
+           ├─3209 /usr/bin/php-cgi
+           ├─3210 /usr/bin/php-cgi
+           ├─3211 /usr/bin/php-cgi
+           ├─3212 /usr/bin/php-cgi
+           ├─3213 /usr/bin/php-cgi
+           ├─3214 /usr/bin/php-cgi
+           ├─3215 /usr/bin/php-cgi
+           ├─3216 /usr/bin/php-cgi
+           ├─3217 /usr/bin/php-cgi
+           └─3218 /usr/bin/php-cgi
+
+Jun 21 16:57:32 localhost.localdomain systemd[1]: Started Spawn FastCGI scripts to be used by web servers.
+```
+
 
 
