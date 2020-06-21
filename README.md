@@ -98,3 +98,5 @@ Jun 21 14:55:30 localhost.localdomain grep[2223]: 10      systemd         282930
 Jun 21 14:55:30 localhost.localdomain systemd[1]: Started Starting findword service.
 ```
 Как видим команда указанная в findword.service указывает все строки c ключевым словом systemd, и благодаря созданному нами findword.timer юниту поиск ключевого слова осуществляется раз в 30 секунд.
+
+## 2) Из репозитория epel установить spawn-fcgi и переписать init-скрипт на unit-файл (имя service должно называться так же: spawn-fcgi)
