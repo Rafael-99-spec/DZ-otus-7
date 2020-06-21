@@ -7,7 +7,7 @@ Configuration file for my findword service
 WORD="systemd"
 LOG=/var/log/findword.log
 ```
-Далее создадим лог файл с ключевым словом /var/log/findword.log 
+Далее создадим сам /var/log/findword.log лог файл с ключевым словом - systemd 
 ```
 1       systemd         123
 2       systemd         456
@@ -23,7 +23,7 @@ LOG=/var/log/findword.log
 После чего создаем два юнита /etc/systemd/system/findword.service и /etc/systemd/system/findword.timer соответственно. 
 
 Файлы конфигурации наших юнитов выглядят след. образом
-
+Единственной функцией сервис юнита является поиск ключевого слова с помощью утилиты grep.
 /etc/systemd/system/findword.service
 ```
 [Unit]
@@ -34,6 +34,7 @@ Type=oneshot
 EnvironmentFile=/etc/sysconfig/findword
 ExecStart=/bin/grep $WORD $LOG
 ```
+Наш таймер юнит прдназначен для того чтобы запускать указанный в секции [Timer] юнит (Unit=findword.service), раз в 30 секунд.
 /etc/systemd/system/findword.timer
 ```
 [Unit]
@@ -49,6 +50,7 @@ Unit=findword.service
 [Install]
 WantedBy=multi-user.target
 ```
+Для того чтобы оба юнита приступили к выполнению своих функции необходимо их включить и при это настроить автоматическое включение после загрузки системы, с помощью нижеуказанных команд.
 ```
 [vagrant@localhost ~]$ sudo systemctl enable findword.service
 
@@ -58,7 +60,7 @@ WantedBy=multi-user.target
 
 [vagrant@localhost ~]$ sudo systemctl start findword.timer
 ```
-
+Далее для того чтобы убедиться, что наши юниты функционируют корректно, достаточно всего лишь посмотреть статус службы findword.service с помощью утилиты systemctl
 ```
 [vagrant@localhost ~]$ sudo systemctl status findword
 ● findword.service - Starting findword service
@@ -95,3 +97,4 @@ Jun 21 14:55:30 localhost.localdomain grep[2223]: 9       systemd         252627
 Jun 21 14:55:30 localhost.localdomain grep[2223]: 10      systemd         282930
 Jun 21 14:55:30 localhost.localdomain systemd[1]: Started Starting findword service.
 ```
+Как видим команда указанная в timer.service указывает все строки ключевым словом systemd, и благодаря созданному нами .timer юниту поиск ключевого слова осуществляется раз в 30 секунд.
