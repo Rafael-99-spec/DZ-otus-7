@@ -2,12 +2,13 @@
 -----------------------------------------------------------------------
 ## 1) Написать service, который будет раз в 30 секунд мониторить лог на предмет наличия ключевого слова (файл лога и ключевое слово должны задаваться в /etc/sysconfig)
 Создадим файл конфигурации для нашего сервиса. Для ключевого слова и пути к лог файлу назначим переменные LOG и WORD. 
-[vagrant@localhost ~]$ cat /etc/sysconfig/findword 
+```
 Configuration file for my findword service
 WORD="systemd"
 LOG=/var/log/findword.log
-Далее создадим лог файл с ключевым словом. 
-[vagrant@localhost ~]$ sudo nano /var/log/findword.log 
+```
+Далее создадим лог файл с ключевым словом /var/log/findword.log 
+```
 1       systemd         123
 2       systemd         456
 3       systemd         789
@@ -18,8 +19,9 @@ LOG=/var/log/findword.log
 8       systemd         222324
 9       systemd         252627
 10      systemd         282930
-
+```
 После чего создаем два юнита /etc/systemd/system/findword.service и /etc/systemd/system/findword.timer
+```
 [Unit]
 Description=Starting findword service
 
@@ -27,7 +29,8 @@ Description=Starting findword service
 Type=oneshot
 EnvironmentFile=/etc/sysconfig/findword
 ExecStart=/bin/grep $WORD $LOG
-
+```
+```
 [Unit]
 Description=Run required service once in 30 seconds
 
@@ -40,8 +43,7 @@ Unit=findword.service
 
 [Install]
 WantedBy=multi-user.target
-
-[vagrant@localhost ~]$ sudo systemctl 
+```
 
 [vagrant@localhost ~]$ sudo systemctl enable findword.service
 
