@@ -1,9 +1,9 @@
-h1					ДЗ №7 Systemd
+#					ДЗ №7 Systemd
 
 1) Написать service, который будет раз в 30 секунд мониторить лог на предмет наличия ключевого слова (файл лога и ключевое слово должны задаваться в /etc/sysconfig)
 Создадим файл конфигурации для нашего сервиса. Для ключевого слова и пути к лог файлу назначим переменные ЛОГ и ВОРД. 
 [vagrant@localhost ~]$ cat /etc/sysconfig/findword 
-# Configuration file for my findword service
+Configuration file for my findword service
 WORD="systemd"
 LOG=/var/log/findword.log
 Далее создадим лог файл с ключевым словом. 
