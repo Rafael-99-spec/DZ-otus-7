@@ -117,7 +117,7 @@ OPTIONS="-u apache -g apache -s $SOCKET -S -M 0600 -C 32 -F 1 -P /var/run/spawn-
 ```
 [vagrant@localhost ~]$ sudo nano /etc/systemd/system/spawn-fcgi.service
 [Unit]
-Description = Spawn-fcgi startup service by Otus
+Description = Spawn FastCGI scripts to be used by web servers
 After=network.target
 
 [Service]
