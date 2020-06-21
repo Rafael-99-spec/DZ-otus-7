@@ -102,13 +102,12 @@ Jun 21 14:55:30 localhost.localdomain systemd[1]: Started Starting findword serv
 Как видим по таймингу запуска службы(29s ago при первом просмотре и 795ms ago при втором просмотре) команда, указанная в findword.service проверяет /var/log/findword.log на наличие указанного в /etc/sysconfig/findword ключевого слова systemd, и благодаря созданному нами findword.timer юниту поиск ключевого слова осуществляется раз в 30 секунд.
 
 ## 2) Из репозитория epel установить spawn-fcgi и переписать init-скрипт на unit-файл (имя service должно называться так же: spawn-fcgi)
-
+Установим spawn-fcgi и все необходимые для его работы пакеты. 
+```
+[vagrant@localhost ~]$ sudo yum install epel-release -y && sudo yum install spawn-fcgi php php-cli mod_fcgid httpd -y
 
 ```
-sudo yum install epel-release -y && sudo yum install spawn-fcgi php php-cli mod_fcgid httpd -y
-
-```
-
+Далее сначала раскомментируем две последние строки файла конфигурации, путь к которой мы укажем совсем скоро в нашем юнит файле - spawn-fcgi.service.
 ```
 # You must set some working options before the "spawn-fcgi" service will work.
 # If SOCKET points to a file, then this file is cleaned up by the init script.
@@ -119,7 +118,7 @@ sudo yum install epel-release -y && sudo yum install spawn-fcgi php php-cli mod_
 SOCKET=/var/run/php-fcgi.sock
 OPTIONS="-u apache -g apache -s $SOCKET -S -M 0600 -C 32 -F 1 -P /var/run/spawn-fcgi.pid -- /usr/bin/php-cgi"
 ```
-
+Собственно создаем юнит файл и перепишем параметры с скрипта /etc/rc.d/init.d/spawn-fcgi(работающий через SysV) на наш новый Systemd юнит(В качестве поджсказки использовал статью на сайте по след. ссылке - https://www.redhat.com/en/blog/converting-traditional-sysv-init-scripts-red-hat-enterprise-linux-7-systemd-unit-files)
 ```
 [vagrant@localhost ~]$ sudo nano /etc/systemd/system/spawn-fcgi.service
 [Unit]
@@ -136,13 +135,9 @@ PIDFile=/var/run/spawn-fcgi.pid
 [Install]
 WantedBy=multi-user.target
 ```
-
+Далее запустим службу spawn-fcgi.service
 ```
 [vagrant@localhost ~]$ sudo systemctl start spawn-fcgi
-[vagrant@localhost ~]$ sudo systemctl status spawn-fcgi
-```
-
-```
 [vagrant@localhost ~]$ sudo systemctl status spawn-fcgi -l
 ● spawn-fcgi.service - Spawn FastCGI scripts to be used by web servers
    Loaded: loaded (/etc/systemd/system/spawn-fcgi.service; disabled; vendor preset: disabled)
