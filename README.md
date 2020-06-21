@@ -104,8 +104,8 @@ Jun 21 14:55:30 localhost.localdomain systemd[1]: Started Starting findword serv
 ## 2) Из репозитория epel установить spawn-fcgi и переписать init-скрипт на unit-файл (имя service должно называться так же: spawn-fcgi)
 Установим spawn-fcgi и все необходимые для его работы пакеты. 
 ```
-[vagrant@localhost ~]$ sudo yum install epel-release -y && sudo yum install spawn-fcgi php php-cli mod_fcgid httpd -y
-
+[vagrant@localhost ~]$ sudo yum install epel-release -y 
+[vagrant@localhost ~]$ sudo yum install spawn-fcgi php php-cli mod_fcgid httpd -y
 ```
 Далее сначала раскомментируем две последние строки файла конфигурации, путь к которой мы укажем совсем скоро в нашем юнит файле - spawn-fcgi.service.
 ```
