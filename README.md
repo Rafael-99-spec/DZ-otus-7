@@ -9,7 +9,7 @@ LOG=/var/log/findword.log
 ```
 Далее создадим сам /var/log/findword.log лог файл с ключевым словом - systemd 
 ```
-1       systemd         123
+1       sysv            123
 2       systemd         456
 3       systemd         789
 4       systemd         101112
@@ -19,6 +19,11 @@ LOG=/var/log/findword.log
 8       systemd         222324
 9       systemd         252627
 10      systemd         282930
+11      sysv            313233
+12      sysv            343536
+13      sysv            373839
+14      sysv            404142
+15      sysv            434445
 ```
 После чего создаем два юнита /etc/systemd/system/findword.service и /etc/systemd/system/findword.timer соответственно. 
 
