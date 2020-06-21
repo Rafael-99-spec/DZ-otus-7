@@ -44,7 +44,7 @@ Unit=findword.service
 [Install]
 WantedBy=multi-user.target
 ```
-
+```
 [vagrant@localhost ~]$ sudo systemctl enable findword.service
 
 [vagrant@localhost ~]$ sudo systemctl enable findword.timer
@@ -52,7 +52,9 @@ WantedBy=multi-user.target
 [vagrant@localhost ~]$ sudo systemctl start findword.service
 
 [vagrant@localhost ~]$ sudo systemctl start findword.timer
+```
 
+```
 [vagrant@localhost ~]$ sudo systemctl status findword
 ● findword.service - Starting findword service
    Loaded: loaded (/etc/systemd/system/findword.service; static; vendor preset: disabled)
@@ -87,3 +89,4 @@ Jun 21 14:55:30 localhost.localdomain grep[2223]: 8       systemd         222324
 Jun 21 14:55:30 localhost.localdomain grep[2223]: 9       systemd         252627
 Jun 21 14:55:30 localhost.localdomain grep[2223]: 10      systemd         282930
 Jun 21 14:55:30 localhost.localdomain systemd[1]: Started Starting findword service.
+```
