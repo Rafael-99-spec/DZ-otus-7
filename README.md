@@ -1,13 +1,13 @@
 #					ДЗ №7 Systemd
 
-1) Написать service, который будет раз в 30 секунд мониторить лог на предмет наличия ключевого слова (файл лога и ключевое слово должны задаваться в /etc/sysconfig)
-Создадим файл конфигурации для нашего сервиса. Для ключевого слова и пути к лог файлу назначим переменные ЛОГ и ВОРД. 
+## 1) Написать service, который будет раз в 30 секунд мониторить лог на предмет наличия ключевого слова (файл лога и ключевое слово должны задаваться в /etc/sysconfig)
+Создадим файл конфигурации для нашего сервиса. Для ключевого слова и пути к лог файлу назначим переменные LOG и WORD. 
 [vagrant@localhost ~]$ cat /etc/sysconfig/findword 
 Configuration file for my findword service
 WORD="systemd"
 LOG=/var/log/findword.log
 Далее создадим лог файл с ключевым словом. 
-[vagrant@localhost ~]$ cat /var/log/findword.log 
+[vagrant@localhost ~]$ sudo nano /var/log/findword.log 
 1       systemd         123
 2       systemd         456
 3       systemd         789
@@ -19,7 +19,7 @@ LOG=/var/log/findword.log
 9       systemd         252627
 10      systemd         282930
 
-После чего создаем два юнита и для нашенго сервиса 
+После чего создаем два юнита /etc/systemd/system/findword.service и /etc/systemd/system/findword.timer
 [Unit]
 Description=Starting findword service
 
@@ -43,10 +43,14 @@ WantedBy=multi-user.target
 
 [vagrant@localhost ~]$ sudo systemctl 
 
+[vagrant@localhost ~]$ sudo systemctl enable findword.service
 
-sudo systemctl enable findword.timer
-sudo systemctl start findword.service
-sudo systemctl start findword.timer
+[vagrant@localhost ~]$ sudo systemctl enable findword.timer
+
+[vagrant@localhost ~]$ sudo systemctl start findword.service
+
+[vagrant@localhost ~]$ sudo systemctl start findword.timer
+
 [vagrant@localhost ~]$ sudo systemctl status findword
 ● findword.service - Starting findword service
    Loaded: loaded (/etc/systemd/system/findword.service; static; vendor preset: disabled)
