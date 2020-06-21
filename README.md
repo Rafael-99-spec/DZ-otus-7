@@ -20,7 +20,11 @@ LOG=/var/log/findword.log
 9       systemd         252627
 10      systemd         282930
 ```
-После чего создаем два юнита /etc/systemd/system/findword.service и /etc/systemd/system/findword.timer
+После чего создаем два юнита /etc/systemd/system/findword.service и /etc/systemd/system/findword.timer соответственно. 
+
+Файлы конфигурации наших юнитов выглядят след. образом
+
+/etc/systemd/system/findword.service
 ```
 [Unit]
 Description=Starting findword service
@@ -30,6 +34,7 @@ Type=oneshot
 EnvironmentFile=/etc/sysconfig/findword
 ExecStart=/bin/grep $WORD $LOG
 ```
+/etc/systemd/system/findword.timer
 ```
 [Unit]
 Description=Run required service once in 30 seconds
