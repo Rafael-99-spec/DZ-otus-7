@@ -102,3 +102,34 @@ Jun 21 14:55:30 localhost.localdomain systemd[1]: Started Starting findword serv
 Как видим по таймингу запуска службы(29s ago при первом просмотре и 795ms ago при втором просмотре) команда, указанная в findword.service проверяет /var/log/findword.log на наличие указанного в /etc/sysconfig/findword ключевого слова systemd, и благодаря созданному нами findword.timer юниту поиск ключевого слова осуществляется раз в 30 секунд.
 
 ## 2) Из репозитория epel установить spawn-fcgi и переписать init-скрипт на unit-файл (имя service должно называться так же: spawn-fcgi)
+
+
+```
+sudo yum install epel-release -y && sudo yum install spawn-fcgi php php-cli mod_fcgid httpd -y
+
+```
+
+```
+SOCKET=/var/run/php-fcgi.sock
+OPTIONS="-u apache -g apache -s $SOCKET -S -M 0600 -C 32 -F 1 -P /var/run/spawn-fcgi.pid -- /usr/bin/php-cgi"
+```
+
+```
+[vagrant@localhost ~]$ sudo nano /etc/systemd/system/spawn-fcgi.service
+[Unit]
+Description = Spawn-fcgi startup service by Otus
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/sysconfig/spawn-fcgi
+ExecStart=/usr/bin/spawn-fcgi -n $OPTIONS
+KillMode=process
+PIDFile=/var/run/spawn-fcgi.pid
+
+[Install]
+WantedBy=multi-user.target
+```
+
+
+
