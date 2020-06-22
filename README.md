@@ -232,3 +232,49 @@ cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd1.conf
 cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd2.conf
 ```
 
+
+```
+[vagrant@localhost ~]$ sudo systemctl status httpd@one.service
+● httpd@one.service - The Apache HTTP Server
+   Loaded: loaded (/etc/systemd/system/httpd@.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2020-06-22 14:42:49 UTC; 5min ago
+     Docs: man:httpd(8)
+           man:apachectl(8)
+ Main PID: 2641 (httpd)
+   Status: "Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec"
+   CGroup: /system.slice/system-httpd.slice/httpd@one.service
+           ├─2641 /usr/sbin/httpd -f conf/one.conf -DFOREGROUND
+           ├─2642 /usr/sbin/httpd -f conf/one.conf -DFOREGROUND
+           ├─2643 /usr/sbin/httpd -f conf/one.conf -DFOREGROUND
+           ├─2644 /usr/sbin/httpd -f conf/one.conf -DFOREGROUND
+           ├─2645 /usr/sbin/httpd -f conf/one.conf -DFOREGROUND
+           ├─2646 /usr/sbin/httpd -f conf/one.conf -DFOREGROUND
+           └─2647 /usr/sbin/httpd -f conf/one.conf -DFOREGROUND
+
+Jun 22 14:42:48 localhost.localdomain systemd[1]: Starting The Apache HTTP Server...
+Jun 22 14:42:48 localhost.localdomain httpd[2641]: AH00558: httpd: Could not reliably determine the server's fully q...ssage
+Jun 22 14:42:49 localhost.localdomain systemd[1]: Started The Apache HTTP Server.
+Hint: Some lines were ellipsized, use -l to show in full.
+[vagrant@localhost ~]$ sudo systemctl status httpd@two.service
+● httpd@two.service - The Apache HTTP Server
+   Loaded: loaded (/etc/systemd/system/httpd@.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2020-06-22 14:42:54 UTC; 5min ago
+     Docs: man:httpd(8)
+           man:apachectl(8)
+ Main PID: 2656 (httpd)
+   Status: "Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec"
+   CGroup: /system.slice/system-httpd.slice/httpd@two.service
+           ├─2656 /usr/sbin/httpd -f conf/two.conf -DFOREGROUND
+           ├─2657 /usr/sbin/httpd -f conf/two.conf -DFOREGROUND
+           ├─2658 /usr/sbin/httpd -f conf/two.conf -DFOREGROUND
+           ├─2659 /usr/sbin/httpd -f conf/two.conf -DFOREGROUND
+           ├─2660 /usr/sbin/httpd -f conf/two.conf -DFOREGROUND
+           ├─2661 /usr/sbin/httpd -f conf/two.conf -DFOREGROUND
+           └─2662 /usr/sbin/httpd -f conf/two.conf -DFOREGROUND
+
+Jun 22 14:42:54 localhost.localdomain systemd[1]: Starting The Apache HTTP Server...
+Jun 22 14:42:54 localhost.localdomain httpd[2656]: AH00558: httpd: Could not reliably determine the server's fully q...ssage
+Jun 22 14:42:54 localhost.localdomain systemd[1]: Started The Apache HTTP Server.
+Hint: Some lines were ellipsized, use -l to show in full.
+```
+
