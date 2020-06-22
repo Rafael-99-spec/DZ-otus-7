@@ -185,4 +185,39 @@ Jun 21 16:57:32 localhost.localdomain systemd[1]: Started Spawn FastCGI scripts 
 [vagrant@localhost ~]$ sudo cp /usr/lib/systemd/system/httpd.service /etc/systemd/system/httpd2.service
 ```
 
+```
+[vagrant@localhost ~]$ cat /etc/sysconfig/httpd-i
+OPTIONS=-f conf/i.conf
+```
+
+```
+[vagrant@localhost ~]$ cat /etc/sysconfig/httpd-ii 
+OPTIONS=-f conf/ii.conf
+```
+
+```
+[vagrant@localhost ~]$ cat /etc/systemd/system/httpd2.service 
+[Unit]
+Description=The Apache HTTP Server
+After=network.target remote-fs.target nss-lookup.target
+Documentation=man:httpd(8)
+Documentation=man:apachectl(8)
+
+[Service]
+Type=notify
+EnvironmentFile=/etc/sysconfig/httpd-%I
+ExecStart=/usr/sbin/httpd $OPTIONS -DFOREGROUND
+ExecReload=/usr/sbin/httpd $OPTIONS -k graceful
+ExecStop=/bin/kill -WINCH ${MAINPID}
+# We want systemd to give httpd some time to finish gracefully, but still want
+# it to kill httpd after TimeoutStopSec if something went wrong during the
+# graceful stop. Normally, Systemd sends SIGTERM signal right after the
+# ExecStop, which would kill httpd. We are sending useless SIGCONT here to give
+# httpd time to finish.
+KillSignal=SIGCONT
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+```
 
