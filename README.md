@@ -226,7 +226,7 @@ OPTIONS=-f conf/one.conf
 [vagrant@localhost ~]$ cat /etc/sysconfig/httpd-two
 OPTIONS=-f conf/two.conf
 ```
-Далее создадим две копии оригинального конфигурационного файла httpd, и зададим в обоих файлах разные номера портов 80 и 8080 соответственно(```Listen 80``` и ```Listen 8080``` соответственно). А также укажем параметр pid-файла - ```PidFile /var/run/httpd-second.pid```
+Далее создадим две копии оригинального конфигурационного файла httpd, и зададим в обоих файлах разные номера портов 80 и 8080 соответственно(```Listen 80``` и ```Listen 8080``` соответственно). А также укажем параметр pid-файла для второго httpd - ```PidFile /var/run/httpd-second.pid```
 ```
 cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/one.conf
 cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/two.conf
