@@ -226,13 +226,13 @@ OPTIONS=-f conf/one.conf
 [vagrant@localhost ~]$ cat /etc/sysconfig/httpd-two
 OPTIONS=-f conf/two.conf
 ```
-Далее создадим две копии оригинального конфигурационного файла, и назначим обоим адресам разные номера портов 80 и 8080 соответственно(```Listen 80``` и ```Listen 8080``` соответственно). А также укажем параметр pid-файла - ```PidFile /var/run/httpd-second.pid```
+Далее создадим две копии оригинального конфигурационного файла httpd, и зададим в обоих файлах разные номера портов 80 и 8080 соответственно(```Listen 80``` и ```Listen 8080``` соответственно). А также укажем параметр pid-файла - ```PidFile /var/run/httpd-second.pid```
 ```
 cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd1.conf
 cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd2.conf
 ```
 
-
+Далее для проверки корректной работы обоих образцов httpd достаточно запустить и посмотреть статус через утилиту systemctl. Также можно проверить правильно ли функционируют конфигурационные файлы httpd проверив прослушиваемые порты на ВМ через утилиту Netstat
 ```
 [vagrant@localhost ~]$ sudo systemctl start httpd@one.service httpd@two.service
 [vagrant@localhost ~]$ sudo systemctl status httpd@one.service httpd@two.service
