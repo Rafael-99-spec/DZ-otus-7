@@ -1,0 +1,13 @@
+[Unit]
+Description = Spawn FastCGI scripts to be used by web servers
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/sysconfig/spawn-fcgi
+ExecStart=/usr/bin/spawn-fcgi -n $OPTIONS
+KillMode=process
+PIDFile=/var/run/spawn-fcgi.pid
+
+[Install]
+WantedBy=multi-user.target
