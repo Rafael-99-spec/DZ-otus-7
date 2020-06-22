@@ -182,18 +182,9 @@ Jun 21 16:57:32 localhost.localdomain systemd[1]: Started Spawn FastCGI scripts 
 ```
 ## 3) Дополнить unit-файл httpd (он же apache) возможностью запустить несколько инстансов сервера с разными конфигурационными файлами
 ```
-[vagrant@localhost ~]$ sudo cp /usr/lib/systemd/system/httpd.service /etc/systemd/system/httpd2.service
+[vagrant@localhost ~]$ sudo cp /usr/lib/systemd/system/httpd.service /etc/systemd/system/httpd@.service
 ```
 
-```
-[vagrant@localhost ~]$ cat /etc/sysconfig/httpd-i
-OPTIONS=-f conf/i.conf
-```
-
-```
-[vagrant@localhost ~]$ cat /etc/sysconfig/httpd-ii 
-OPTIONS=-f conf/ii.conf
-```
 
 ```
 [vagrant@localhost ~]$ cat /etc/systemd/system/httpd2.service 
@@ -219,5 +210,25 @@ PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
+```
+
+```
+cp /etc/sysconfig/httpd /etc/sysconfig/httpd-one
+cp /etc/sysconfig/httpd /etc/sysconfig/httpd-two
+```
+
+```
+[vagrant@localhost ~]$ cat /etc/sysconfig/httpd-one
+OPTIONS=-f conf/one.conf
+```
+
+```
+[vagrant@localhost ~]$ cat /etc/sysconfig/httpd-two
+OPTIONS=-f conf/two.conf
+```
+
+```
+cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd1.conf
+cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd2.conf
 ```
 
