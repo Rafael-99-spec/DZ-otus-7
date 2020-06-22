@@ -8,7 +8,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "centos/7"
   config.vm.provision "shell", inline: <<-SHELL
-  sudo yum install vim nano epel-release -y && yum install spawn-fcgi php php-cli mod_fcgid httpd -y
+  sudo yum install vim nano net-tools -y
   sudo cp /vagrant/findword /etc/sysconfig/findword
   sudo cp /vagrant/findword.service /etc/systemd/system/findword.service
   sudo cp /vagrant/findword.timer /etc/systemd/system/findword.timer
@@ -38,5 +38,6 @@ Vagrant.configure("2") do |config|
   sudo echo "PidFile /var/run/httpd-two.pid" >> /etc/httpd/conf/two.conf
   sudo sed -i "s/Listen 80/Listen 8080/g" /etc/httpd/conf/two.conf
   sudo systemctl start httpd@one httpd@two
+  sudo echo "DZ7-3 done!!!"
   SHELL
 end
