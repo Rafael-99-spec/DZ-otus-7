@@ -180,6 +180,9 @@ WantedBy=multi-user.target
 
 Jun 21 16:57:32 localhost.localdomain systemd[1]: Started Spawn FastCGI scripts to be used by web servers.
 ```
-
+## 3) Дополнить unit-файл httpd (он же apache) возможностью запустить несколько инстансов сервера с разными конфигурационными файлами
+```
+[vagrant@localhost ~]$ sudo cp /usr/lib/systemd/system/httpd.service /etc/systemd/system/httpd2.service
+```
 
 
