@@ -181,11 +181,11 @@ WantedBy=multi-user.target
 Jun 21 16:57:32 localhost.localdomain systemd[1]: Started Spawn FastCGI scripts to be used by web servers.
 ```
 ## 3) Дополнить unit-файл httpd (он же apache) возможностью запустить несколько инстансов сервера с разными конфигурационными файлами
+Скопируем оригинальный файл конфигурации юнита httpd.service в папку - /etc/systemd/system/
 ```
 [vagrant@localhost ~]$ sudo cp /usr/lib/systemd/system/httpd.service /etc/systemd/system/httpd@.service
 ```
-
-
+Далее приведем его к след. виду
 ```
 [vagrant@localhost ~]$ cat /etc/systemd/system/httpd@.service 
 [Unit]
@@ -211,12 +211,12 @@ PrivateTmp=true
 [Install]
 WantedBy=multi-user.target
 ```
-
+Скопируем файл окружения. Юнит httpd.service будет обращаться к обоим файлам окружения благодаря параметру - EnvironmentFile=/etc/sysconfig/httpd-```%I```
 ```
 cp /etc/sysconfig/httpd /etc/sysconfig/httpd-one
 cp /etc/sysconfig/httpd /etc/sysconfig/httpd-two
 ```
-
+Переименуем имена конфигурационных файлов ```httpd.conf``` в ```one.conf```
 ```
 [vagrant@localhost ~]$ cat /etc/sysconfig/httpd-one
 OPTIONS=-f conf/one.conf
@@ -226,7 +226,7 @@ OPTIONS=-f conf/one.conf
 [vagrant@localhost ~]$ cat /etc/sysconfig/httpd-two
 OPTIONS=-f conf/two.conf
 ```
-
+Далее создадим две копии оригинального конфигурационного файла, и назначим обоим адресам разные номера портов 80 и 8080 соответственно(```Listen 80``` и ```Listen 8080``` соответственно). А также укажем параметр pid-файла - ```PidFile /var/run/httpd-second.pid```
 ```
 cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd1.conf
 cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd2.conf
