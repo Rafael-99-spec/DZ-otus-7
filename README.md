@@ -278,3 +278,25 @@ Jun 22 14:42:54 localhost.localdomain systemd[1]: Started The Apache HTTP Server
 Hint: Some lines were ellipsized, use -l to show in full.
 ```
 
+```
+[vagrant@localhost ~]$ sudo netstat -aptun
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      628/sshd            
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      753/master          
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      337/rpcbind         
+tcp        0      0 10.0.2.15:22            10.0.2.2:33648          ESTABLISHED 2207/sshd: vagrant  
+tcp6       0      0 :::22                   :::*                    LISTEN      628/sshd            
+tcp6       0      0 ::1:25                  :::*                    LISTEN      753/master          
+tcp6       0      0 :::111                  :::*                    LISTEN      337/rpcbind         
+tcp6       0      0 :::8080                 :::*                    LISTEN      2656/httpd          
+tcp6       0      0 :::80                   :::*                    LISTEN      2641/httpd          
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           340/chronyd         
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           440/dhclient        
+udp        0      0 0.0.0.0:111             0.0.0.0:*                           337/rpcbind         
+udp        0      0 0.0.0.0:925             0.0.0.0:*                           337/rpcbind         
+udp6       0      0 ::1:323                 :::*                                340/chronyd         
+udp6       0      0 :::111                  :::*                                337/rpcbind         
+udp6       0      0 :::925                  :::*                                337/rpcbind         
+[vagrant@localhost ~]$ 
+```
