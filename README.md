@@ -234,6 +234,7 @@ cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd2.conf
 
 
 ```
+[vagrant@localhost ~]$ sudo systemctl start httpd@one.service httpd@two.service
 [vagrant@localhost ~]$ sudo systemctl status httpd@one.service httpd@two.service
 ● httpd@one.service - The Apache HTTP Server
    Loaded: loaded (/etc/systemd/system/httpd@.service; enabled; vendor preset: disabled)
@@ -279,9 +280,7 @@ Jun 22 15:03:24 localhost.localdomain systemd[1]: Starting The Apache HTTP Serve
 Jun 22 15:03:25 localhost.localdomain httpd[2843]: AH00558: httpd: Could not reliably determine the server's fully q...ssage
 Jun 22 15:03:25 localhost.localdomain systemd[1]: Started The Apache HTTP Server.
 Hint: Some lines were ellipsized, use -l to show in full.
-```
 
-```
 [vagrant@localhost ~]$ sudo netstat -aptun
 Active Internet connections (servers and established)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
